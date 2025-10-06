@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qfhs06x3n8g7"]
+
+[ext_resource type="Script" uid="uid://cmykvhxmkien5" path="res://scripts/room_camera.gd" id="1_htqe6"]
+
+[node name="Camera2D" type="Camera2D"]
+position_smoothing_enabled = true
+editor_draw_limits = true
+script = ExtResource("1_htqe6")

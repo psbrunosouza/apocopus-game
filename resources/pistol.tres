@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipResource" load_steps=3 format=3 uid="uid://rakvfe8cn5mx"]
+
+[ext_resource type="Script" uid="uid://d3mr84wyv0nwv" path="res://scripts/equipment_resource.gd" id="1_jk5il"]
+[ext_resource type="Texture2D" uid="uid://dmds0ofdc88n" path="res://assets/weapons2.png" id="2_dti5m"]
+
+[resource]
+script = ExtResource("1_jk5il")
+texture = ExtResource("2_dti5m")
+name = "pistol"
+hint = ""
+damage = 0
+type = 0
+effects = []

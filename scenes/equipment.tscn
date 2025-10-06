@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3mngv6kspbfy"]
+
+[ext_resource type="Texture2D" uid="uid://cy5w6yuw7rcjk" path="res://assets/weapons1.png" id="1_dusko"]
+[ext_resource type="Script" uid="uid://c11ujlpxlg32m" path="res://scripts/equipment.gd" id="1_yruq6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njucy"]
+bg_color = Color(0.946193, 0.703121, 0.36298, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elp5n"]
+bg_color = Color(0.43134, 0.43134, 0.43134, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brmsw"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Equipment" type="Button" node_paths=PackedStringArray("texture")]
+custom_minimum_size = Vector2(16, 16)
+theme_override_styles/focus = SubResource("StyleBoxFlat_njucy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_elp5n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_elp5n")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_elp5n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_brmsw")
+script = ExtResource("1_yruq6")
+texture = NodePath("Image")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_dusko")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipResource" load_steps=3 format=3 uid="uid://cxqw2ahxy4fhw"]
+
+[ext_resource type="Script" uid="uid://d3mr84wyv0nwv" path="res://scripts/equipment_resource.gd" id="1_y712b"]
+[ext_resource type="Texture2D" uid="uid://cy5w6yuw7rcjk" path="res://assets/weapons1.png" id="2_y712b"]
+
+[resource]
+script = ExtResource("1_y712b")
+texture = ExtResource("2_y712b")
+name = "sub"
+hint = ""
+damage = 0
+type = 1
+effects = []

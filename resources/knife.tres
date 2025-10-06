@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipResource" load_steps=3 format=3 uid="uid://clo8culpjwlfm"]
+
+[ext_resource type="Script" uid="uid://d3mr84wyv0nwv" path="res://scripts/equipment_resource.gd" id="1_t2pv6"]
+[ext_resource type="Texture2D" uid="uid://dmds0ofdc88n" path="res://assets/weapons2.png" id="2_hp5sf"]
+
+[resource]
+script = ExtResource("1_t2pv6")
+texture = ExtResource("2_hp5sf")
+name = "knife"
+hint = ""
+damage = 0
+type = 2
+effects = []

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://5a2e2kmf3xdj"]
+
+[ext_resource type="Script" uid="uid://djcukuwmwudwk" path="res://scripts/hud_equipment.gd" id="1_dhwl4"]
+[ext_resource type="Texture2D" uid="uid://dmds0ofdc88n" path="res://assets/weapons2.png" id="2_f205h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyygp"]
+bg_color = Color(0.932651, 0.836611, 0.49235, 1)
+
+[node name="HudEquipment" type="Button" node_paths=PackedStringArray("image")]
+custom_minimum_size = Vector2(96, 96)
+size_flags_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_lyygp")
+script = ExtResource("1_dhwl4")
+image = NodePath("Image")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_f205h")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://5l0i5aity51w"]
+
+[ext_resource type="PackedScene" uid="uid://d1k1vasy4b3vt" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://c8ub88h6no5oj" path="res://scenes/rooms/002_labaratory_b.tscn" id="2_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://dtktdm2n8jiro" path="res://scenes/door_area.tscn" id="2_k0juu"]
+[ext_resource type="PackedScene" uid="uid://c5ncwk5uylhxr" path="res://scenes/rooms/001_laboratory_a.tscn" id="3_k0juu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
+size = Vector2(25, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
+size = Vector2(24, 32)
+
+[node name="World" type="Node2D"]
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Laboratory" parent="Rooms" instance=ExtResource("3_k0juu")]
+
+[node name="DoorArea" parent="Rooms/Laboratory" node_paths=PackedStringArray("connected_room") instance=ExtResource("2_k0juu")]
+position = Vector2(816, 136)
+connected_room = NodePath("../../LabaratoryB")
+player_pos = Vector2(885, 133)
+left_cam_limit = 865
+right_cam_limit = 1675
+bottom_cam_limit = 180
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Laboratory/DoorArea"]
+position = Vector2(9.5, -0.5)
+shape = SubResource("RectangleShape2D_71j4m")
+
+[node name="LabaratoryB" parent="Rooms" instance=ExtResource("2_4wyf3")]
+position = Vector2(864, 0)
+
+[node name="DoorArea" parent="Rooms/LabaratoryB" node_paths=PackedStringArray("connected_room") instance=ExtResource("2_k0juu")]
+position = Vector2(-11, 136)
+connected_room = NodePath("..")
+player_pos = Vector2(797, 134)
+right_cam_limit = 810
+bottom_cam_limit = 180
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/LabaratoryB/DoorArea"]
+shape = SubResource("RectangleShape2D_k0juu")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_nnsk1")]
+position = Vector2(91, 115)
+camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 0
+limit_right = 810
+limit_bottom = 180
+position_smoothing_enabled = true
+editor_draw_limits = true

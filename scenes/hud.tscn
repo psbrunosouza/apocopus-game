@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkofmgkaqh0q2"]
+
+[ext_resource type="Script" uid="uid://denjy2kaly34o" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="PackedScene" uid="uid://5a2e2kmf3xdj" path="res://scenes/hud_equipment.tscn" id="2_oo0fn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo0fn"]
+
+[node name="Hud" type="Panel" node_paths=PackedStringArray("equipment_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oo0fn")
+script = ExtResource("1_ahhtf")
+equipment_container = NodePath("Equipments")
+
+[node name="Equipments" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.052
+anchor_right = 0.127
+anchor_bottom = 0.141
+offset_top = -0.16
+offset_right = 0.159988
+offset_bottom = -0.279999
+
+[node name="HudEquipment" parent="Equipments" instance=ExtResource("2_oo0fn")]
+layout_mode = 2
+
+[node name="HudEquipment2" parent="Equipments" instance=ExtResource("2_oo0fn")]
+layout_mode = 2

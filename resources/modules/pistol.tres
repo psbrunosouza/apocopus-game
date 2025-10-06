@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ModuleResource" load_steps=2 format=3 uid="uid://cao704lsk8guc"]
+
+[ext_resource type="Script" uid="uid://dfnivwu636584" path="res://scripts/module_resource.gd" id="1_oda8q"]
+
+[resource]
+script = ExtResource("1_oda8q")
+damage = 0
+ammo = 3
+has_infinity_ammo = false
+bullet_path = "res://scenes/bullets/pistol_bullet.tscn"

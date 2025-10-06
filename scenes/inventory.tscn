@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqb06v3vxy17g"]
+
+[ext_resource type="Script" uid="uid://c4b0wsmbo7te8" path="res://scripts/inventory.gd" id="1_brmsw"]
+[ext_resource type="PackedScene" uid="uid://dowocwfnv1iy8" path="res://scenes/slot.tscn" id="2_njucy"]
+[ext_resource type="Resource" uid="uid://rakvfe8cn5mx" path="res://resources/pistol.tres" id="3_njucy"]
+[ext_resource type="Resource" uid="uid://cxqw2ahxy4fhw" path="res://resources/sub.tres" id="4_njucy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kxvld"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxvld"]
+bg_color = Color(0.299118, 0.649343, 0.782306, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kh8if"]
+bg_color = Color(0.298039, 0.65098, 0.780392, 1)
+
+[node name="Inventory" type="Panel" node_paths=PackedStringArray("selected_slot", "equipment_grid")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kxvld")
+script = ExtResource("1_brmsw")
+selected_slot = NodePath("LeftPanel/Equipments/Slot")
+equipment_grid = NodePath("RightPanel/Items")
+
+[node name="LeftPanel" type="Panel" parent="."]
+layout_mode = 2
+anchor_right = 0.387
+anchor_bottom = 1.0
+offset_right = 0.159988
+theme_override_styles/panel = SubResource("StyleBoxFlat_kxvld")
+
+[node name="Equipments" type="HBoxContainer" parent="LeftPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -8.0
+offset_right = 18.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot" parent="LeftPanel/Equipments" groups=["slots"] instance=ExtResource("2_njucy")]
+layout_mode = 2
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_bottom = NodePath("")
+equipment_resource = ExtResource("3_njucy")
+
+[node name="Slot2" parent="LeftPanel/Equipments" groups=["slots"] instance=ExtResource("2_njucy")]
+layout_mode = 2
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_bottom = NodePath("")
+equipment_resource = ExtResource("4_njucy")
+
+[node name="RightPanel" type="Panel" parent="."]
+layout_mode = 2
+anchor_left = 0.388
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.144028
+theme_override_styles/panel = SubResource("StyleBoxFlat_kh8if")
+
+[node name="Items" type="GridContainer" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -28.0
+offset_right = 58.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 6

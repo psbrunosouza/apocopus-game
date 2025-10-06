@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://rxnbghacgjqa"]
+
+[ext_resource type="PackedScene" uid="uid://cslet2vwrwour" path="res://scenes/game.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bkofmgkaqh0q2" path="res://scenes/hud.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bqb06v3vxy17g" path="res://scenes/inventory.tscn" id="3_jyhfs"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Screen" type="CanvasLayer" parent="."]
+
+[node name="GameViewport" type="SubViewportContainer" parent="Screen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="Screen/GameViewport"]
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(80, 45)
+render_target_update_mode = 4
+
+[node name="Game" parent="Screen/GameViewport/SubViewport" instance=ExtResource("1_o5qli")]
+
+[node name="Hud" parent="Screen" instance=ExtResource("2_sugp2")]
+
+[node name="Inventory" parent="Screen" instance=ExtResource("3_jyhfs")]
+visible = false

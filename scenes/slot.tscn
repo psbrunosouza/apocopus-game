@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dowocwfnv1iy8"]
+
+[ext_resource type="Script" uid="uid://loxq28t5oqnb" path="res://scripts/slot.gd" id="1_ic0fu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njucy"]
+bg_color = Color(0.946193, 0.703121, 0.36298, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elp5n"]
+bg_color = Color(0.43134, 0.43134, 0.43134, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brmsw"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Slot" type="Button" node_paths=PackedStringArray("texture_rect")]
+custom_minimum_size = Vector2(16, 16)
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+theme_override_styles/focus = SubResource("StyleBoxFlat_njucy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_elp5n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_elp5n")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_elp5n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_brmsw")
+script = ExtResource("1_ic0fu")
+texture_rect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0

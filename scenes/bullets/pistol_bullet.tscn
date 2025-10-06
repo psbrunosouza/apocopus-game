@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwt6no0m74vrn"]
+
+[ext_resource type="Texture2D" uid="uid://dilhymtr2q6bs" path="res://assets/bullets/pistol.png" id="1_d1opd"]
+[ext_resource type="Script" uid="uid://cix1a31abspyt" path="res://scripts/bullets/pistol_bullet.gd" id="1_rw4m8"]
+[ext_resource type="Texture2D" uid="uid://nhocai8d0rxq" path="res://assets/particles/thunder.png" id="3_to451"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hxypr"]
+radius = 3.0
+
+[sub_resource type="Animation" id="Animation_to451"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rw4m8"]
+resource_name = "default"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.097595, 0.20306, 0.300655),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, 0.0, 0.349066]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q6uya"]
+_data = {
+&"RESET": SubResource("Animation_to451"),
+&"default": SubResource("Animation_rw4m8")
+}
+
+[sub_resource type="Gradient" id="Gradient_q6uya"]
+offsets = PackedFloat32Array(0, 0.475862, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.176471, 0.898039, 1, 1, 0.0627451, 0.639216, 0.376471, 1)
+
+[node name="PistolBullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_rw4m8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hxypr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_q6uya")
+}
+autoplay = "default"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+texture = ExtResource("3_to451")
+lifetime = 0.5
+randomness = 0.15
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_q6uya")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d1opd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
