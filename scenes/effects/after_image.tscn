@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwpd044iwil2v"]
+
+[ext_resource type="Shader" uid="uid://bqq2unlrnqvqi" path="res://shaders/shadow.gdshader" id="1_dclv7"]
+[ext_resource type="Script" uid="uid://dclr2xyv1ouis" path="res://scripts/effects/after_image.gd" id="1_isvdl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dclv7"]
+shader = ExtResource("1_dclv7")
+shader_parameter/alpha = 0.1
+shader_parameter/color = Vector3(0.1, 0.5, 0.9)
+
+[node name="AfterImage" type="Sprite2D"]
+material = SubResource("ShaderMaterial_dclv7")
+script = ExtResource("1_isvdl")

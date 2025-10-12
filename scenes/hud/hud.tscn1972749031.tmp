@@ -1,0 +1,134 @@
+[gd_scene load_steps=10 format=3 uid="uid://kyhx1uatcf02"]
+
+[ext_resource type="Texture2D" uid="uid://t4o8cnqkosn8" path="res://assets/hud/first_weapon.png" id="1_48c2t"]
+[ext_resource type="Script" uid="uid://b7b77dkk2rghj" path="res://scripts/hud/hud.gd" id="1_c45xl"]
+[ext_resource type="Texture2D" uid="uid://bwlwat0ifgjj0" path="res://assets/hud/life_bar_empty.png" id="2_0bx4p"]
+[ext_resource type="Texture2D" uid="uid://c66fpavmcfcei" path="res://assets/hud/second_weapon.png" id="2_cgeww"]
+[ext_resource type="Texture2D" uid="uid://bw4vt7j6ae2bq" path="res://assets/hud/life_bar_border.png" id="2_mgtrf"]
+[ext_resource type="Script" uid="uid://bnkkymnd2i3ea" path="res://scripts/hud/bars.gd" id="2_mq0y1"]
+[ext_resource type="PackedScene" uid="uid://cilitrjcjc0bm" path="res://scenes/hud/life_bar.tscn" id="2_v7mo4"]
+[ext_resource type="PackedScene" uid="uid://cgcbomuml26xu" path="res://scenes/hud/weight_bar.tscn" id="3_n56i7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6kolt"]
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("modules_grid", "bars")]
+script = ExtResource("1_c45xl")
+modules_grid = NodePath("Panel/Modules")
+bars = NodePath("Panel/Bars")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6kolt")
+metadata/_edit_use_anchors_ = true
+
+[node name="Bars" type="Control" parent="Panel" node_paths=PackedStringArray("life_bar", "weight_bar")]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("2_mq0y1")
+life_bar = NodePath("LifeBar")
+weight_bar = NodePath("WeightBar")
+
+[node name="LifeBar" parent="Panel/Bars" instance=ExtResource("2_v7mo4")]
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="WeightBar" parent="Panel/Bars" instance=ExtResource("3_n56i7")]
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0265625
+anchor_top = 0.0444444
+anchor_right = 0.0265625
+anchor_bottom = 0.0458333
+offset_right = 5.0
+offset_bottom = 6.0
+scale = Vector2(4, 4)
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect9" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_mgtrf")
+
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect5" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect6" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect7" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect8" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0bx4p")
+
+[node name="TextureRect10" type="TextureRect" parent="Panel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_mgtrf")
+
+[node name="Modules" type="GridContainer" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0265625
+anchor_top = 0.856944
+anchor_right = 0.0265625
+anchor_bottom = 0.856944
+offset_right = 33.0
+offset_bottom = 17.0
+scale = Vector2(4, 4)
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="FirstWeaponContainer" type="MarginContainer" parent="Panel/Modules"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="FirstModule" type="TextureRect" parent="Panel/Modules/FirstWeaponContainer"]
+layout_mode = 2
+texture = ExtResource("1_48c2t")
+
+[node name="SecondWeaponContainer" type="MarginContainer" parent="Panel/Modules"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SecondModule" type="TextureRect" parent="Panel/Modules/SecondWeaponContainer"]
+layout_mode = 2
+texture = ExtResource("2_cgeww")
+
+[connection signal="bar_resized" from="Panel/Bars/LifeBar" to="Panel/Bars" method="_on_life_bar_bar_resized"]

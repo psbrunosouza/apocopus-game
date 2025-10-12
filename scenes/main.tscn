@@ -1,32 +1,81 @@
-[gd_scene load_steps=4 format=3 uid="uid://rxnbghacgjqa"]
+[gd_scene load_steps=10 format=3 uid="uid://5l0i5aity51w"]
 
-[ext_resource type="PackedScene" uid="uid://cslet2vwrwour" path="res://scenes/game.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://bkofmgkaqh0q2" path="res://scenes/hud.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://bqb06v3vxy17g" path="res://scenes/inventory.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://c5ncwk5uylhxr" path="res://scenes/rooms/001_laboratory_a.tscn" id="1_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://dtktdm2n8jiro" path="res://scenes/rooms/door_area.tscn" id="2_tefeu"]
+[ext_resource type="PackedScene" uid="uid://qfhs06x3n8g7" path="res://scenes/camera/room_camera.tscn" id="3_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://c8ub88h6no5oj" path="res://scenes/rooms/002_labaratory_b.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://d1k1vasy4b3vt" path="res://scenes/player/player.tscn" id="5_85g3d"]
+[ext_resource type="PackedScene" uid="uid://kyhx1uatcf02" path="res://scenes/hud/hud.tscn" id="6_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://djwl7aj2guk0f" path="res://scenes/menus/pause_menu.tscn" id="6_tefeu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
+size = Vector2(25, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfnet"]
+size = Vector2(24, 32)
 
 [node name="Main" type="Node2D"]
 
-[node name="Screen" type="CanvasLayer" parent="."]
+[node name="Game" type="Node2D" parent="."]
 
-[node name="GameViewport" type="SubViewportContainer" parent="Screen"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-stretch_shrink = 4
+[node name="Rooms" type="Node2D" parent="Game"]
 
-[node name="SubViewport" type="SubViewport" parent="Screen/GameViewport"]
-handle_input_locally = false
-snap_2d_transforms_to_pixel = true
-canvas_item_default_texture_filter = 0
-size = Vector2i(80, 45)
-render_target_update_mode = 4
+[node name="LaboratoryA" parent="Game/Rooms" instance=ExtResource("1_tbgi4")]
 
-[node name="Game" parent="Screen/GameViewport/SubViewport" instance=ExtResource("1_o5qli")]
+[node name="DoorArea" parent="Game/Rooms/LaboratoryA" node_paths=PackedStringArray("connected_room") instance=ExtResource("2_tefeu")]
+position = Vector2(816, 136)
+collision_layer = 4
+connected_room = NodePath("../../LabaratoryB")
+player_pos = Vector2(885, 133)
+origin = "left"
 
-[node name="Hud" parent="Screen" instance=ExtResource("2_sugp2")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Rooms/LaboratoryA/DoorArea"]
+position = Vector2(9.5, -0.5)
+shape = SubResource("RectangleShape2D_71j4m")
 
-[node name="Inventory" parent="Screen" instance=ExtResource("3_jyhfs")]
+[node name="RoomCamera" parent="Game/Rooms/LaboratoryA" instance=ExtResource("3_o6xl0")]
+limit_left = 0
+limit_top = 0
+limit_right = 810
+limit_bottom = 180
+
+[node name="LabaratoryB" parent="Game/Rooms" instance=ExtResource("4_tipki")]
+position = Vector2(864, 0)
+
+[node name="DoorArea" parent="Game/Rooms/LabaratoryB" node_paths=PackedStringArray("connected_room") instance=ExtResource("2_tefeu")]
+position = Vector2(-11, 136)
+connected_room = NodePath("../../LaboratoryA")
+player_pos = Vector2(797, 134)
+origin = "right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Rooms/LabaratoryB/DoorArea"]
+shape = SubResource("RectangleShape2D_qfnet")
+metadata/_edit_lock_ = true
+
+[node name="RoomCamera" parent="Game/Rooms/LabaratoryB" instance=ExtResource("3_o6xl0")]
+limit_left = 865
+limit_top = 0
+limit_right = 1675
+limit_bottom = 180
+
+[node name="GhostContainer" type="Node2D" parent="Game" groups=["ghost_container"]]
+
+[node name="DustContainer" type="Node2D" parent="Game" groups=["dust_container"]]
+
+[node name="Player" parent="Game" groups=["player"] instance=ExtResource("5_85g3d")]
+position = Vector2(81, 141)
+collision_mask = 6
+
+[node name="BulletsContainer" type="Node2D" parent="Game" groups=["bullets_container"]]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HUD" parent="UI" instance=ExtResource("6_o6xl0")]
+
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("game") instance=ExtResource("6_tefeu")]
 visible = false
+game = NodePath("../../Game")

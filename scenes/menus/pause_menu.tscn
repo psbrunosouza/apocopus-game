@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://djwl7aj2guk0f"]
+
+[ext_resource type="Script" uid="uid://bgofllrlnbjyo" path="res://scripts/menus/pause_menu.gd" id="1_n87rw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uahpa"]
+bg_color = Color(0.734034, 0.571303, 0.272152, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n87rw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myx47"]
+bg_color = Color(0, 0.510419, 0.531854, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kukqi"]
+bg_color = Color(0, 0.510419, 0.531854, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5d2l8"]
+bg_color = Color(0, 0.510419, 0.531854, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l7mv"]
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("actions")]
+script = ExtResource("1_n87rw")
+actions = NodePath("Panel/Actions")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uahpa")
+
+[node name="Actions" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/Actions"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_n87rw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_myx47")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kukqi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5d2l8")
+text = "RESUME"
+
+[node name="Back" type="Button" parent="Panel/Actions"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_7l7mv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5d2l8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5d2l8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5d2l8")
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Panel/Actions/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/Actions/Back" to="." method="_on_back_pressed"]

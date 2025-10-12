@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddv25vh3ejbun"]
+
+[ext_resource type="Texture2D" uid="uid://bw4vt7j6ae2bq" path="res://assets/hud/life_bar_border.png" id="1_b2acx"]
+[ext_resource type="Texture2D" uid="uid://bwlwat0ifgjj0" path="res://assets/hud/life_bar_empty.png" id="2_etd1i"]
+
+[node name="Lifebar" type="Control"]
+layout_mode = 3
+offset_right = 7.0
+offset_bottom = 7.0
+scale = Vector2(4, 4)
+metadata/_edit_use_anchors_ = true
+
+[node name="left" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 1.0
+offset_bottom = 7.0
+texture = ExtResource("1_b2acx")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="bar" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_right = 16.0
+offset_bottom = 7.0
+texture = ExtResource("2_etd1i")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="right" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 17.0
+offset_bottom = 7.0
+texture = ExtResource("1_b2acx")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true

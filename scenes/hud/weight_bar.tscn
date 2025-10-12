@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgcbomuml26xu"]
+
+[ext_resource type="Texture2D" uid="uid://bw4vt7j6ae2bq" path="res://assets/hud/life_bar_border.png" id="1_mwxoo"]
+[ext_resource type="Script" uid="uid://bc82ijck3p75j" path="res://scripts/hud/weight_bar.gd" id="1_u02ka"]
+[ext_resource type="Texture2D" uid="uid://ce78k3ys8w4qh" path="res://assets/hud/weight_bar.png" id="2_6yvgu"]
+
+[node name="WeightBar" type="Control" node_paths=PackedStringArray("border", "bar")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_u02ka")
+border = NodePath("Border")
+bar = NodePath("Bar")
+bar_width = 5
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 7.0
+offset_bottom = 7.0
+texture = ExtResource("1_mwxoo")
+stretch_mode = 1
+
+[node name="Bar" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 6.0
+offset_bottom = 7.0
+texture = ExtResource("2_6yvgu")
+stretch_mode = 1

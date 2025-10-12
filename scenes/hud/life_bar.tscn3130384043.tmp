@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cilitrjcjc0bm"]
+
+[ext_resource type="Script" uid="uid://c4xxkqebf427g" path="res://scripts/hud/life_bar.gd" id="1_3fc2b"]
+
+[node name="LifeBar" type="Control" node_paths=PackedStringArray("hp_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3fc2b")
+hp_label = NodePath("HP")
+
+[node name="HP" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "hp:"

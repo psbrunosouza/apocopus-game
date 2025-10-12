@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cilitrjcjc0bm"]
+
+[ext_resource type="Script" uid="uid://c4xxkqebf427g" path="res://scripts/hud/life_bar.gd" id="1_3fc2b"]
+[ext_resource type="Texture2D" uid="uid://bw4vt7j6ae2bq" path="res://assets/hud/life_bar_border.png" id="2_qao2l"]
+[ext_resource type="Texture2D" uid="uid://bwlwat0ifgjj0" path="res://assets/hud/life_bar_empty.png" id="3_71shw"]
+[ext_resource type="Texture2D" uid="uid://yy13dmm3tjll" path="res://assets/hud/life_bar_filled.png" id="4_vq8ju"]
+
+[node name="LifeBar" type="Control" node_paths=PackedStringArray("life_bar_border", "life_bar_filled", "life_bar_empty")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3fc2b")
+life_bar_border = NodePath("LifeBarBorder")
+life_bar_filled = NodePath("LifeBarFilled")
+life_bar_empty = NodePath("LifeBarEmpty")
+life_bar_width = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="LifeBarBorder" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 7.0
+offset_bottom = 7.0
+texture = ExtResource("2_qao2l")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LifeBarEmpty" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 1.0
+offset_bottom = 7.0
+texture = ExtResource("3_71shw")
+expand_mode = 1
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LifeBarFilled" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 1.0
+offset_bottom = 7.0
+texture = ExtResource("4_vq8ju")
+expand_mode = 1
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true

@@ -6,10 +6,9 @@ var player_jumping_on_enter: bool
 var connected_room: Node2D
 var origin: String
 
-@onready var world = get_tree().current_scene
-@onready var player = world.get_node("Player") as CharacterBody2D
-
 func change_room():
+	var player = get_tree().get_first_node_in_group("player")
+	
 	if is_activate:
 		var camera = connected_room.get_node("RoomCamera") as Camera2D
 		camera.make_current()
