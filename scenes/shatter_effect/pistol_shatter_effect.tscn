@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkfnmaw73fvh8"]
+
+[ext_resource type="Texture2D" uid="uid://d3kqpmcuc5hd1" path="res://assets/player/pistol_shatter_effect.png" id="1_wiw76"]
+[ext_resource type="Script" uid="uid://cca6sj5bcmh7h" path="res://scripts/effects/pistol_shatter_effect.gd" id="2_tk23c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk23c"]
+atlas = ExtResource("1_wiw76")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ixdg"]
+atlas = ExtResource("1_wiw76")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0m4s"]
+atlas = ExtResource("1_wiw76")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l3305"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk23c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ixdg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0m4s")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="PistolShatterEffect" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_l3305")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("2_tk23c")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

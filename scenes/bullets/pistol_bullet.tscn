@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwt6no0m74vrn"]
+[gd_scene load_steps=14 format=3 uid="uid://bwt6no0m74vrn"]
 
-[ext_resource type="Texture2D" uid="uid://dilhymtr2q6bs" path="res://assets/bullets/pistol.png" id="1_d1opd"]
 [ext_resource type="Script" uid="uid://cix1a31abspyt" path="res://scripts/bullets/pistol_bullet.gd" id="1_rw4m8"]
+[ext_resource type="Texture2D" uid="uid://venf8ggn043j" path="res://assets/bullets/pistol_charge.png" id="3_q6uya"]
 [ext_resource type="Texture2D" uid="uid://nhocai8d0rxq" path="res://assets/particles/thunder.png" id="3_to451"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hxypr"]
-radius = 3.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to451"]
+size = Vector2(10, 5)
 
 [sub_resource type="Animation" id="Animation_to451"]
 length = 0.001
@@ -49,19 +49,55 @@ _data = {
 offsets = PackedFloat32Array(0, 0.475862, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.176471, 0.898039, 1, 1, 0.0627451, 0.639216, 0.376471, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wjn1"]
+atlas = ExtResource("3_q6uya")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyn74"]
+atlas = ExtResource("3_q6uya")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxypr"]
+atlas = ExtResource("3_q6uya")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a51he"]
+atlas = ExtResource("3_q6uya")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jj6p0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wjn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyn74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxypr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a51he")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
 [node name="PistolBullet" type="Area2D"]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_rw4m8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_hxypr")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_to451")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_q6uya")
 }
-autoplay = "default"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 10
@@ -75,8 +111,9 @@ initial_velocity_max = 60.0
 scale_amount_min = 0.5
 color_ramp = SubResource("Gradient_q6uya")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_d1opd")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jj6p0")
+frame_progress = 0.20094
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

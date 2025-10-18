@@ -5,8 +5,8 @@ class_name Player
 @export var speed: float = 120.0
 @export var gravity: float = 980.0
 @export var friction: float = 0.75
-@export var jump_force: float = -280.0
-@export var double_jump_force: float = -300.0
+@export var jump_force: float = -250.0
+@export var double_jump_force: float = -250.0
 @export var wall_jump_force: float = -280.0
 @export var wall_jump_push: float = 150.0
 @export var coyote_time: float = 0.1
@@ -16,6 +16,7 @@ class_name Player
 @export var wall_ray_cast_left: RayCast2D
 @export var wall_ray_cast_right: RayCast2D
 @export var sprite: Sprite2D
+@export var arm_sprite: Sprite2D
 @export var has_dash_ability: bool = false 
 @export var can_wall_jump: bool = false
 @export var can_double_jump: bool = false
@@ -23,6 +24,7 @@ class_name Player
 @export var dash_cooldown: float = 0.2
 @export var animation_player: AnimationPlayer
 @export var after_image_interval := 0.02 
+
 var after_image_timer := 0.0
 var coyote_timer: float = 0.0
 var dash_cooldown_timer: float = dash_cooldown
@@ -32,12 +34,16 @@ var is_dashing: bool = false
 var first_jump: bool = false
 var can_dash: bool = false
 var direction: float
-var facing_of: Vector2 = Vector2.RIGHT
+var facing: Vector2 = Vector2.RIGHT
+var h_facing_direction: Vector2 = Vector2.RIGHT
 var jump_dust_scene: PackedScene = preload("res://scenes/effects/jump_dust.tscn")
 var after_image_scene: PackedScene = preload("res://scenes/effects/after_image.tscn")
 
 @onready var dust_container = get_tree().get_first_node_in_group("dust_container")
 @onready var ghost_container = get_tree().get_first_node_in_group("ghost_container")
+
+func _ready() -> void:
+	ModuleManager.shot_fired.connect(_shot_fired)
 
 func _process(_delta: float) -> void:
 	global_position = global_position.round()
@@ -50,6 +56,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_update_animation(delta)
 
+func _shot_fired(_remaining_ammo: int, _resource: ModuleResource):
+	var recoil_force := 320.0
+	velocity.x -= facing.x * recoil_force
+
 func _update_animation(_delta):
 	if is_on_floor():
 		if _is_moving():
@@ -60,20 +70,23 @@ func _update_animation(_delta):
 		if _is_jumping():
 			if first_jump:
 				if sprite.flip_h:
-					$AnimationPlayer.play("jump_facing_left")
+					$AnimationPlayer.play("jump_l")
 				else:
-					$AnimationPlayer.play("jump_facing_right")
+					$AnimationPlayer.play("jump_r")
 			else:
 				if sprite.flip_h:
-					$AnimationPlayer.play("split_jump_left")
+					$AnimationPlayer.play("jump_l")
 				else:
-					$AnimationPlayer.play("split_jump_right") 
+					$AnimationPlayer.play("jump_r")
 		elif _is_falling():
-			if sprite.flip_h:
-				$AnimationPlayer.play("fall_facing_left")
-			else: 
-				$AnimationPlayer.play("fall_facing_right")
-			sprite.rotation_degrees = 360
+			$AnimationPlayer.play("fall")
+
+	if is_dashing:
+		if sprite.flip_h:
+			$AnimationPlayer.play("dash_l")
+		else:
+			$AnimationPlayer.play("dash_r")
+
 # Gravidade
 func _handle_gravity(delta: float):
 	if is_dashing:
@@ -92,14 +105,23 @@ func _handle_movement(delta: float):
 	if direction != 0:
 		player_direction = direction 
 		velocity.x = direction * speed
+		
 		if direction < 0:
 			sprite.flip_h = true
-			facing_of = Vector2.LEFT
+			facing = Vector2.LEFT
+			h_facing_direction = facing
 		elif direction > 0:
 			sprite.flip_h = false
-			facing_of = Vector2.RIGHT
+			facing = Vector2.RIGHT
+			h_facing_direction = facing
 	else:
+		facing = h_facing_direction 
 		velocity.x = move_toward(velocity.x, 0, speed * friction)
+
+	if Input.is_action_pressed("up"):
+		facing = Vector2.UP
+	elif not is_on_floor() and Input.is_action_pressed("down"):
+		facing = Vector2.DOWN
 
 func _handle_dash(delta: float):
 	if not can_dash:

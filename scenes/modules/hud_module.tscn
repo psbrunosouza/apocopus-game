@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2gqrwh5w61f4"]
+
+[ext_resource type="Texture2D" uid="uid://by2sxct8phhb8" path="res://assets/modules/pistol.png" id="1_28b2u"]
+[ext_resource type="Script" uid="uid://bqsnfjwbu8w2m" path="res://scripts/modules/hud_module.gd" id="1_hefa7"]
+
+[node name="HudModule" type="TextureRect"]
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("1_28b2u")
+script = ExtResource("1_hefa7")
+metadata/_edit_use_anchors_ = true

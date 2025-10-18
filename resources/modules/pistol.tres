@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="ModuleResource" load_steps=3 format=3 uid="uid://cao704lsk8guc"]
+[gd_resource type="Resource" script_class="ModuleResource" load_steps=5 format=3 uid="uid://cao704lsk8guc"]
 
+[ext_resource type="Texture2D" uid="uid://o60w8ucq1wn6" path="res://assets/player/pistol_arm_down.png" id="1_2hp1e"]
 [ext_resource type="Script" uid="uid://dfnivwu636584" path="res://scripts/resources/module_resource.gd" id="1_oda8q"]
-[ext_resource type="Texture2D" uid="uid://by2sxct8phhb8" path="res://assets/modules/pistol.png" id="1_w2j47"]
+[ext_resource type="Texture2D" uid="uid://drnkuihisgewf" path="res://assets/player/pistol_arm_foward.png" id="2_f4uqk"]
+[ext_resource type="Texture2D" uid="uid://yr0d55mnlrlr" path="res://assets/player/pistol_arm_up.png" id="3_2hp1e"]
 
 [resource]
 script = ExtResource("1_oda8q")
 damage = 1
-ammo = 3
-has_infinity_ammo = false
+max_ammo = 10
+has_infinity_ammo = true
 bullet_path = "res://scenes/bullets/pistol_bullet.tscn"
-icon = ExtResource("1_w2j47")
+shatter_effect_path = "res://scenes/shatter_effect/pistol_shatter_effect.tscn"
+facing_foward = ExtResource("2_f4uqk")
+facing_down = ExtResource("1_2hp1e")
+facing_up = ExtResource("3_2hp1e")

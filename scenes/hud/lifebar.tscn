@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddv25vh3ejbun"]
+[gd_scene load_steps=3 format=3 uid="uid://dgcldt6tle18o"]
 
 [ext_resource type="Texture2D" uid="uid://bw4vt7j6ae2bq" path="res://assets/hud/life_bar_border.png" id="1_b2acx"]
 [ext_resource type="Texture2D" uid="uid://bwlwat0ifgjj0" path="res://assets/hud/life_bar_empty.png" id="2_etd1i"]
 
 [node name="Lifebar" type="Control"]
 layout_mode = 3
+anchors_preset = 0
 offset_right = 7.0
 offset_bottom = 7.0
 scale = Vector2(4, 4)
